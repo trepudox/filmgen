@@ -1,5 +1,6 @@
 package com.trepudox.filmgen.dataprovider.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.trepudox.filmgen.dataprovider.entity.Genero;
 import lombok.*;
@@ -30,7 +31,12 @@ public class FilmeModel {
     @JsonProperty("ano_lancamento")
     private Integer anoLancamento;
 
-    @OneToMany(mappedBy = "filmeId", targetEntity = FilmeGeneroModel.class)
+    @ManyToMany(targetEntity = GeneroModel.class)
+    @JoinTable(
+            name = "genero_filme",
+            joinColumns = @JoinColumn(name = "filme_id"),
+            inverseJoinColumns = @JoinColumn(name = "genero_id"))
+    @JsonIgnoreProperties("filmes")
     private List<Genero> generos;
 
 }

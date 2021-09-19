@@ -1,5 +1,6 @@
 package com.trepudox.filmgen.dataprovider.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.trepudox.filmgen.dataprovider.entity.Filme;
 import lombok.*;
@@ -26,7 +27,8 @@ public class GeneroModel {
 
     private String descricao;
 
-    @OneToMany(mappedBy = "generoId", targetEntity = FilmeGeneroModel.class)
+    @JsonIgnoreProperties("generos")
+    @ManyToMany(mappedBy = "generos", targetEntity = FilmeModel.class)
     private List<Filme> filmes;
 
 }
