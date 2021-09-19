@@ -19,13 +19,16 @@ public class FilmeModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "filme_id")
     private Integer filmeId;
+
     private String nome;
+
     private String descricao;
-    @JsonProperty("ano_lancamento")
+
     @Column(name = "ano_lancamento")
+    @JsonProperty("ano_lancamento")
     private Integer anoLancamento;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "generoId", targetEntity = FilmeGeneroModel.class)
     private List<Genero> generos;
 
 }
