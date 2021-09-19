@@ -2,17 +2,18 @@ package com.trepudox.filmgen.dataprovider.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.trepudox.filmgen.dataprovider.entity.Filme;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "genero")
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GeneroModel {
 
     @Id
@@ -25,7 +26,7 @@ public class GeneroModel {
 
     private String descricao;
 
-    @OneToMany(mappedBy = "filmeId", targetEntity = FilmeGeneroModel.class)
+    @OneToMany(mappedBy = "generoId", targetEntity = FilmeGeneroModel.class)
     private List<Filme> filmes;
 
 }
