@@ -1,8 +1,11 @@
 package com.trepudox.filmgen.dataprovider.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.trepudox.filmgen.dataprovider.entity.Genero;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,7 +33,9 @@ public class FilmeModel {
     @JsonProperty("ano_lancamento")
     private Integer anoLancamento;
 
-    @OneToMany(mappedBy = "filmeId", targetEntity = FilmeGeneroModel.class)
-    private List<Genero> generos;
+    @OneToMany(mappedBy = "filme", targetEntity = GeneroFilmeModel.class)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties({"filme", "id"})
+    private List<GeneroModel> generos;
 
 }
